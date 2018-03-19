@@ -16,11 +16,13 @@
 	},
 	"plugins": ["react"],
 	"rules": {
-		"indent": ["error", "tab"],
+		"indent": [0, "tab"],
 		"linebreak-style": [0, "windows"],
 		"quotes": ["error", "single"],
 		"semi": ["error", "always"],
 		"react/jsx-uses-react": "error",
-		"react/jsx-uses-vars": "error"
+		"react/jsx-uses-vars": "error",
+		"no-console": "off",
+		"no-debugger": "off"
 	}
 }
