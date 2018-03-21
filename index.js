@@ -6,6 +6,7 @@ const keys = require('./config/keys');
 const bodyParser = require('body-parser');
 
 require('./models/User');
+require('./models/Survey');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI);
@@ -25,13 +26,15 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app);
 require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
-	app.use(express.static('client/build'));
+	app.use(express.static('client/build')); //Express serves production assets if name matches
 
 	const path = require('path');
 	app.get('*', (req, res) => {
 		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+		//Express servers index.html if route isn't identified
 	});
 }
 
