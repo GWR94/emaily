@@ -21,6 +21,7 @@
     "react-stripe-checkout": "^2.6.3",
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
+    "redux-form": "^7.3.0",
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
