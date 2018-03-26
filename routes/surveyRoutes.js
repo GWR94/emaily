@@ -6,15 +6,25 @@ const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
 const Mailer = require('../services/Mailer');
 const surveyTemplate = require('../services/emailTemplates/surveyTemplate');
+
 const Survey = mongoose.model('surveys');
 
 module.exports = app => {
-	app.get('/api/surveys/thanks', (req, res) => {
+	app.get('/api/surveys', requireLogin, async (req, res) => {
+		const surveys = await Survey.find({ _user: req.user.id }).select({
+			recipients: false,
+		});
+
+		res.send(surveys);
+	});
+
+	app.get('/api/surveys/:surveyId/:choice', (req, res) => {
 		res.send('Thanks for voting!');
 	});
 
 	app.post('/api/surveys/webhooks', (req, res) => {
 		const p = new Path('/api/surveys/:surveyId/:choice');
+
 		_.chain(req.body)
 			.map(({ email, url }) => {
 				const match = p.test(new URL(url).pathname);
@@ -26,29 +36,21 @@ module.exports = app => {
 			.uniqBy('email', 'surveyId')
 			.each(({ surveyId, email, choice }) => {
 				Survey.updateOne(
-					//Look at survey collection and find & update the collection
 					{
-						_id: surveyId, //mongoDB needs the id to be '_id'
+						_id: surveyId,
 						recipients: {
-							$elemMatch: {
-								//find recipient with the responded value as false
-								email: email,
-								responded: false,
-							},
+							$elemMatch: { email: email, responded: false },
 						},
 					},
 					{
-						//after survey is found, update it
-						$inc: {
-							[choice]: 1, //update the choice value by 1
-						},
-						$set: {
-							'recipients.$.responded': true, //$ sets the original recipients id to the query
-						},
+						$inc: { [choice]: 1 },
+						$set: { 'recipients.$.responded': true },
+						lastResponded: new Date(),
 					}
 				).exec();
 			})
 			.value();
+
 		res.send({});
 	});
 
@@ -60,20 +62,22 @@ module.exports = app => {
 			subject,
 			body,
 			recipients: recipients.split(',').map(email => ({ email: email.trim() })),
-			_user: req.user.id, //ID created by mongoose
+			_user: req.user.id,
 			dateSent: Date.now(),
 		});
 
+		// Great place to send an email!
+		const mailer = new Mailer(survey, surveyTemplate(survey));
+
 		try {
-			const mailer = new Mailer(survey, surveyTemplate(survey));
 			await mailer.send();
 			await survey.save();
 			req.user.credits -= 1;
 			const user = await req.user.save();
 
 			res.send(user);
-		} catch (e) {
-			res.status(422).send(e);
+		} catch (err) {
+			res.status(422).send(err);
 		}
 	});
 };
