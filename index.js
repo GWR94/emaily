@@ -1,28 +1,25 @@
 const express = require('express');
-const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-const keys = require('./config/keys');
 const bodyParser = require('body-parser');
+const keys = require('./config/keys');
 require('./models/User');
 require('./models/Survey');
 require('./services/passport');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
 
 const app = express();
 
-app.use(cors({ credentials: true }));
-
 app.use(bodyParser.json());
 app.use(
 	cookieSession({
-		maxAge: 30 * 24 * 60 * 60 * 1000, //30 days = 30 * 24 hours * 60 minutes * 60 seconds * 1000 milliseconds
+		maxAge: 30 * 24 * 60 * 60 * 1000,
 		keys: [keys.cookieKey],
 	})
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -31,12 +28,15 @@ require('./routes/billingRoutes')(app);
 require('./routes/surveyRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
-	app.use(express.static('client/build')); //Express serves production assets if name matches
+	// Express will serve up production assets
+	// like our main.js file, or main.css file!
+	app.use(express.static('client/build'));
 
+	// Express will serve up the index.html file
+	// if it doesn't recognize the route
 	const path = require('path');
 	app.get('*', (req, res) => {
 		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-		//Express servers index.html if route isn't identified
 	});
 }
 
