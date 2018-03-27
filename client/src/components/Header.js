@@ -29,19 +29,14 @@ class Header extends React.Component {
 		}
 	}
 
-	constructor() {
-		super();
-		this.state = {};
-	}
-
 	render() {
 		return (
 			<nav>
 				<div className="nav-wrapper">
-					<Link to={this.props.auth ? '/surveys' : '/'} className="left brand-logo">
+					<Link to={this.props.auth ? '/surveys' : '/'} className="left brand-logo emaily-text" style={{marginLeft: '100px'}}>
 						Emaily
 					</Link>
-					<ul className="right">{this.renderContent()}</ul>
+					<ul className="right" style={{marginRight: '100px'}}>{this.renderContent()}</ul>
 				</div>
 			</nav>
 		);

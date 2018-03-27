@@ -1,0 +1,19 @@
+* {
+	font-family: 'PT Sans', sans-serif;
+}
+
+.background {
+	background: url('./media/landing.png') no-repeat fixed center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	height: 100vh;
+	width: 100vw;
+	margin-top: -1px;
+	padding-top: 1px;
+}
+
+.emaily-text {
+	font-family: 'Indie Flower', cursive;
+}
