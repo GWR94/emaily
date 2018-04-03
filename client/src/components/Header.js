@@ -23,7 +23,7 @@ class Header extends React.Component {
 						Credits: {this.props.auth.credits || 0}
 					</li>,
 					<li key="2">
-						<a href="/api/logout">Logout</a>
+						<a className="red btn" href="/api/logout">Logout</a>
 					</li>,
 				];
 		}
