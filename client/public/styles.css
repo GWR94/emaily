@@ -1,5 +1,5 @@
 * {
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'Roboto Slab', serif;
 }
 
 .background {
@@ -14,6 +14,12 @@
 	padding-top: 1px;
 }
 
-.emaily-text {
-	font-family: 'Indie Flower', cursive;
+.welcome-box {
+	width: 400px;
+	margin: 22vh auto;
+	text-align: center;
+	background: white;
+	padding: 1px 30px 20px 30px;
+	border: 1px solid #e57373;
+	border-radius: 20px;
 }
