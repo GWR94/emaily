@@ -21,11 +21,11 @@ class SurveyList extends Component {
 				yes = 50;
 				no = 50;
 			} else if(survey.no > survey.yes) {
-				no = survey.yes / survey.no * 100;
-				yes = 100 - no;
-			} else {
-				yes = survey.no / survey.yes * 100;
+				yes = survey.yes / survey.no * 100;
 				no = 100 - yes;
+			} else {
+				no = survey.no / survey.yes * 100;
+				yes = 100 - no;
 			}
 			return (
 				<div key={survey._id}>
@@ -39,8 +39,8 @@ class SurveyList extends Component {
 							<CardText>
 								<br />
 								<Progress multi style={{width: '100%', fontSize: '14px', height: '24px'}}>
-									<Progress bar color="success" value={yes}>{`Yes: ${Math.ceil(yes)}% ( ${survey.yes} )`}</Progress>
-									<Progress bar color="danger" value={no}>{`No: ${Math.floor(no)}% ( ${survey.no} )`}</Progress>
+									<Progress bar color="success" value={yes}>{`Yes: ${Math.round(Math.ceil(yes))}% ( ${survey.yes} )`}</Progress>
+									<Progress bar color="danger" value={no}>{`No: ${Math.round(Math.floor(no))}% ( ${survey.no} )`}</Progress>
 								</Progress>
 							</CardText>
 						</CardBody>
