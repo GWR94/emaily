@@ -4,9 +4,23 @@ import { fetchSurveys } from '../../actions';
 import { Card, CardText, CardBody, CardTitle, CardSubtitle, Progress } from 'reactstrap';
 
 class SurveyList extends Component {
+	state = {
+		desktop: window.innerWidth > 600
+	}
 	componentDidMount() {
 		this.props.fetchSurveys();
+		window.addEventListener('resize', this.updateWindowDimensions);
 	}
+
+	componentWillUnmount(){
+		window.removeEventListener('resize', this.updateWindowDimensions);		
+	}
+
+	updateWindowDimensions = () => {
+		let desktop = window.innerWidth > 600;
+		this.setState({ desktop });
+	};
+
 
 	renderSurveys() {
 		return this.props.surveys.reverse().map(survey => {
@@ -39,8 +53,8 @@ class SurveyList extends Component {
 							<CardText>
 								<br />
 								<Progress multi style={{width: '100%', height: '24px'}} className="survey-progress">
-									<Progress bar color="success" value={yes}>{`Yes: ${survey.yes}`}</Progress>
-									<Progress bar color="danger" value={no}>{`No: ${survey.no}`}</Progress>
+									<Progress bar color="success" value={yes}>{ !this.state.desktop && yes < 20 ? '' : `Yes: ${survey.yes}`}</Progress>
+									<Progress bar color="danger" value={no}>{ !this.state.desktop && no < 20 ? '' : `No: ${survey.no}`}</Progress>
 								</Progress>
 							</CardText>
 						</CardBody>
