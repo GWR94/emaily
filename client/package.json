@@ -14,7 +14,6 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
     "materialize-css": "^0.100.2",
-    "node-sass-chokidar": "^1.2.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
@@ -25,9 +24,7 @@
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-form": "^7.3.0",
-    "redux-thunk": "^2.2.0",
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive"
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
