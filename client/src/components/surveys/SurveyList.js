@@ -53,8 +53,8 @@ class SurveyList extends Component {
 							<CardText>
 								<br />
 								<Progress multi style={{width: '100%', height: '24px'}} className="survey-progress">
-									<Progress bar color="success" value={yes}>{ !this.state.desktop && yes < 20 ? '' : `Yes: ${survey.yes}`}</Progress>
-									<Progress bar color="danger" value={no}>{ !this.state.desktop && no < 20 ? '' : `No: ${survey.no}`}</Progress>
+									<Progress bar color="success" value={Math.round(Math.ceil(yes))}>{ !this.state.desktop && yes < 20 ? '' : `Yes: ${survey.yes}`}</Progress>
+									<Progress bar color="danger" value={Math.round(Math.floor(no))}>{ !this.state.desktop && no < 20 ? '' : `No: ${survey.no}`}</Progress>
 								</Progress>
 							</CardText>
 						</CardBody>
