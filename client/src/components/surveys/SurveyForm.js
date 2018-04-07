@@ -29,12 +29,11 @@ class SurveyForm extends React.Component {
 						</div>
 					</div>
 					{this.renderField()}
-					<Link to="/surveys" className="red btn-flat left white-text">
+					<Link to="/surveys" className="btn btn-danger" style={{float: 'left'}}>
 						Cancel
 					</Link>
-					<button type="submit" className="teal btn-flat right white-text">
+					<button type="submit" className="btn btn-success" style={{float: 'right'}}>
 						Next
-						<i className="material-icons right">done</i>
 					</button>
 				</form>
 			</div>

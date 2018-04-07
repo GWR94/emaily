@@ -15,11 +15,61 @@
 }
 
 .welcome-box {
-	width: 400px;
-	margin: 22vh auto;
+	width: 100%;
+	margin: 30vh auto;
 	text-align: center;
 	background: white;
 	padding: 1px 30px 20px 30px;
 	border: 1px solid #e57373;
 	border-radius: 20px;
 }
+
+.navbar-colors {
+	background: #e57373 !important;
+	color: white;
+}
+
+.btn {
+	background: rgb(0, 119, 255);
+	color: white !important;
+	font-size: 14px !important;
+	height: 38px;
+	padding: 0 20px;
+	margin: 0 5px;
+}
+
+.fixed-add-btn {
+	background: #ff4545;
+	border-radius: 50%;
+	height: 60px;
+	width: 60px;
+	color: white;
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	padding: 10px;
+	text-align: center;
+	line-height: 50px;
+	margin: 30px;
+	box-shadow: black;
+}
+
+.fixed-add-btn:hover {
+	background: #e43030;
+	color: white;
+}
+
+.red-text {
+	color: red !important;
+	font-weight: 500;
+}
+
+.nav-brand {
+	text-decoration: none !important;
+	color: white;
+}
+
+.nav-brand:hover {
+	color: lightgray;
+}
+

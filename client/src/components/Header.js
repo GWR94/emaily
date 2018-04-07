@@ -1,44 +1,80 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import Payments from './Payments';
-
+import { NavLink } from 'react-router-dom';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, Button } from 'reactstrap';
 class Header extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.toggle = this.toggle.bind(this);
+		this.state = {
+			isOpen: false,
+		};
+	}
+	toggle() {
+		this.setState({
+			isOpen: !this.state.isOpen,
+		});
+	}
 	renderContent() {
 		switch (this.props.auth) {
 			case null:
 				return;
 			case false:
 				return (
-					<li>
-						<a href="/auth/google">Login With Google</a>
-					</li>
+					<Collapse isOpen={this.state.isOpen} navbar>
+						<Nav className="ml-auto" navbar>
+							<NavItem>
+								<Button
+									color="danger"
+									size="lg"
+									onClick={() => (window.location.href = '/auth/google')}
+									style={{ padding: '0 20px' }}
+								>
+									Login With Google
+								</Button>
+							</NavItem>
+						</Nav>
+					</Collapse>
 				);
 			default:
-				return [
-					<li key="0">
-						<Payments />
-					</li>,
-					<li key="1" style={{margin: '0 10px 0 20px'}}>
-						Credits: {this.props.auth.credits || 0}
-					</li>,
-					<li key="2">
-						<a className="red btn" href="/api/logout">Logout</a>
-					</li>,
-				];
+				return (
+					<Collapse isOpen={this.state.isOpen} navbar key="1">
+						<Nav className="ml-auto" navbar>
+							<NavItem>
+								<Payments style={{ margin: '0 5px' }} />
+							</NavItem>
+							<NavItem style={{ margin: '8px 12px 5px 8px', display: 'flex', alignContent: 'center' }}>
+								Credits: {this.props.auth.credits || 0}
+							</NavItem>
+							<NavItem>
+								<Button
+									color="danger"
+									size="lg"
+									onClick={() => (window.location.href = '/api/logout')}
+									style={{ padding: '0 20px' }}
+								>
+									Logout
+								</Button>
+							</NavItem>
+						</Nav>
+					</Collapse>
+				);
 		}
 	}
 
 	render() {
 		return (
-			<nav>
-				<div className="nav-wrapper">
-					<Link to={this.props.auth ? '/surveys' : '/'} className="left brand-logo emaily-text" style={{marginLeft: '100px'}}>
-						Emaily
-					</Link>
-					<ul className="right" style={{marginRight: '100px'}}>{this.renderContent()}</ul>
-				</div>
-			</nav>
+			<div>
+				<Navbar dark expand="md" className="navbar-colors" style={{ marginBottom: '30px' }}>
+					<NavbarBrand style={{ marginLeft: '10px' }}>
+						<NavLink className="nav-brand" to={this.props.auth ? '/surveys' : '/'}>Emaily</NavLink>
+					</NavbarBrand>
+					<NavbarToggler onClick={this.toggle} />
+					{this.renderContent()}
+				</Navbar>
+			</div>
 		);
 	}
 }
