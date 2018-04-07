@@ -39,6 +39,7 @@
 }
 
 .fixed-add-btn {
+	clear: both;
 	background: #ff4545;
 	border-radius: 50%;
 	height: 60px;
@@ -50,7 +51,7 @@
 	padding: 10px;
 	text-align: center;
 	line-height: 50px;
-	margin: 30px;
+	margin: 20px;
 	box-shadow: black;
 }
 
@@ -73,3 +74,34 @@
 	color: lightgray;
 }
 
+.survey-title {
+	font-size: 16px;
+}
+.survey-subtitle {
+	font-size: 14px;
+}
+.survey-sent {
+	font-size: 12px;
+}
+.survey-bar {
+	font-size: 10px;
+}
+
+
+@media (max-width: 980px) {
+	.survey-title {
+		font-size: 14px;
+	}
+	.survey-subtitle {
+		font-size: 12px;
+	}
+	.survey-sent {
+		font-size: 10px;
+	}
+	.survey-bar {
+		font-size: 8px;
+	}
+	.dashboard-text {
+		font-size: 12px;
+	}
+}

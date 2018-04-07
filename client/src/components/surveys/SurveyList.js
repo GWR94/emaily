@@ -31,16 +31,16 @@ class SurveyList extends Component {
 				<div key={survey._id}>
 					<Card className="navbar-colors" style={{ marginBottom: '20px' }}>
 						<CardBody>
-							<CardTitle>{survey.title}</CardTitle>
-							<CardSubtitle>{survey.body}</CardSubtitle>
-							<CardText style={{ float: 'right' }}>
+							<CardTitle className="survey-title">{survey.title}</CardTitle>
+							<CardSubtitle className="survey-subtitle">{survey.body}</CardSubtitle>
+							<CardText style={{ float: 'right' }} className="survey-sent">
 								Sent On: {new Date(survey.dateSent).toLocaleDateString()}
 							</CardText>
 							<CardText>
 								<br />
-								<Progress multi style={{width: '100%', fontSize: '14px', height: '24px'}}>
-									<Progress bar color="success" value={yes}>{`Yes: ${Math.round(Math.ceil(yes))}% ( ${survey.yes} )`}</Progress>
-									<Progress bar color="danger" value={no}>{`No: ${Math.round(Math.floor(no))}% ( ${survey.no} )`}</Progress>
+								<Progress multi style={{width: '100%', height: '24px'}} className="survey-progress">
+									<Progress bar color="success" value={yes}>{`Yes: ${survey.yes}`}</Progress>
+									<Progress bar color="danger" value={no}>{`No: ${survey.no}`}</Progress>
 								</Progress>
 							</CardText>
 						</CardBody>
