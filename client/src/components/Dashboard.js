@@ -9,20 +9,23 @@ const Dashboard = ({ surveys }) => {
 		<div>
 			<Header />
 			<div className="container">
-			<h4 style={{textAlign: 'center'}}>Dashboard</h4>
+			<h4 style={{textAlign: 'center', marginBottom: '20px'}}>Dashboard</h4>
 			{ 
 				surveys.length === 0
 				? 	<div style={{textAlign: 'center'}}>
 						<p>There are no surveys to display. Please add send a survey using the + button for responses to display.</p>
 						<p>If you think this is an error, please contact us <a href="" target="_blank">here</a></p>
+						<p>To create a new survey, please click the red '+' button at the bottom of the page</p>
 					</div>
 				: 	<div style={{textAlign: 'center'}}>
-						<p>Here are your current survey responses. Responses can take a minute or so to appear, so please be patient while this updates.</p>
+						<p>Here are your current survey responses. Responses can take a minute or so for the click percentage to update, 
+						so please be patient while this loads.</p>
+						<p>To create a new survey, please click the red '+' button at the bottom right of the page</p>						
 					</div>
 			}
 			<SurveyList />
 			<div className="fixed-action-btn">
-				<Link to="/surveys/new" className="btn-floating btn-large waves-effect waves-light red">
+				<Link to="/surveys/new" className="fixed-add-btn">
 					<i className="material-icons">add</i>
 				</Link>
 			</div>

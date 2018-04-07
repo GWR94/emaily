@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSurveys } from '../../actions';
+import { Card, CardText, CardBody, CardTitle, CardSubtitle, Progress } from 'reactstrap';
 
 class SurveyList extends Component {
 	componentDidMount() {
@@ -9,17 +10,41 @@ class SurveyList extends Component {
 
 	renderSurveys() {
 		return this.props.surveys.reverse().map(survey => {
+			let yes, no;
+			if(survey.yes === 0 && survey.no >= 1) {
+				no = 100;
+				yes = 0;
+			} else if(survey.no === 0 && survey.yes >= 1) {
+				yes = 100;
+				no = 0;
+			} else if(survey.no === survey.yes) {
+				yes = 50;
+				no = 50;
+			} else if(survey.no > survey.yes) {
+				no = survey.yes / survey.no * 100;
+				yes = 100 - no;
+			} else {
+				yes = survey.no / survey.yes * 100;
+				no = 100 - yes;
+			}
 			return (
-				<div className="card red lighten-2" key={survey._id}>
-					<div className="card-content white-text">
-						<span className="card-title">{survey.title}</span>
-						<p>{survey.body}</p>
-						<p className="right">Sent On: {new Date(survey.dateSent).toLocaleDateString()}</p>
-					</div>
-					<div className="card-action">
-						<a className="white-text"><b>Yes: {survey.yes}</b></a>
-						<a className="white-text"><b>No: {survey.no}</b></a>
-					</div>
+				<div key={survey._id}>
+					<Card className="navbar-colors" style={{ marginBottom: '20px' }}>
+						<CardBody>
+							<CardTitle>{survey.title}</CardTitle>
+							<CardSubtitle>{survey.body}</CardSubtitle>
+							<CardText style={{ float: 'right' }}>
+								Sent On: {new Date(survey.dateSent).toLocaleDateString()}
+							</CardText>
+							<CardText>
+								<br />
+								<Progress multi style={{width: '100%', fontSize: '14px', height: '24px'}}>
+									<Progress bar color="success" value={yes}>{`Yes: ${yes}% ( ${survey.yes} )`}</Progress>
+									<Progress bar color="danger" value={no}>{`No: ${no}% ( ${survey.no} )`}</Progress>
+								</Progress>
+							</CardText>
+						</CardBody>
+					</Card>
 				</div>
 			);
 		});
