@@ -5,15 +5,16 @@ import { Card, CardText, CardBody, CardTitle, CardSubtitle, Progress } from 'rea
 
 class SurveyList extends Component {
 	state = {
-		desktop: window.innerWidth > 600
-	}
+		desktop: window.innerWidth > 600,
+	};
+
 	componentDidMount() {
 		this.props.fetchSurveys();
 		window.addEventListener('resize', this.updateWindowDimensions);
 	}
 
-	componentWillUnmount(){
-		window.removeEventListener('resize', this.updateWindowDimensions);		
+	componentWillUnmount() {
+		window.removeEventListener('resize', this.updateWindowDimensions);
 	}
 
 	updateWindowDimensions = () => {
@@ -21,26 +22,26 @@ class SurveyList extends Component {
 		this.setState({ desktop });
 	};
 
-
 	renderSurveys() {
 		return this.props.surveys.reverse().map(survey => {
 			let yes, no;
-			if(survey.yes === 0 && survey.no >= 1) {
+			if (survey.yes === 0 && survey.no >= 1) {
 				no = 100;
 				yes = 0;
-			} else if(survey.no === 0 && survey.yes >= 1) {
+			} else if (survey.no === 0 && survey.yes >= 1) {
 				yes = 100;
 				no = 0;
-			} else if(survey.no === survey.yes) {
+			} else if (survey.no === survey.yes) {
 				yes = 50;
 				no = 50;
-			} else if(survey.no > survey.yes) {
-				yes = survey.yes / survey.no * 100;
+			} else if (survey.no > survey.yes) {
+				yes = Math.round(survey.yes / survey.no * 100);
 				no = 100 - yes;
 			} else {
-				no = survey.no / survey.yes * 100;
+				no = Math.round(survey.no / survey.yes * 100);
 				yes = 100 - no;
 			}
+			console.log('yes: ' + yes, ' no: ' + no);
 			return (
 				<div key={survey._id}>
 					<Card className="navbar-colors" style={{ marginBottom: '20px' }}>
@@ -52,9 +53,13 @@ class SurveyList extends Component {
 							</CardText>
 							<CardText>
 								<br />
-								<Progress multi style={{width: '100%', height: '24px'}} className="survey-progress">
-									<Progress bar color="success" value={Math.round(Math.ceil(yes))}>{ !this.state.desktop && yes < 20 ? '' : `Yes: ${survey.yes}`}</Progress>
-									<Progress bar color="danger" value={Math.round(Math.floor(no))}>{ !this.state.desktop && no < 20 ? '' : `No: ${survey.no}`}</Progress>
+								<Progress multi style={{ width: '100%', height: '24px' }} className="survey-progress">
+									<Progress bar color="success" value={yes}>
+										{!this.state.desktop && yes < 20 ? '' : `Yes: ${survey.yes}`}
+									</Progress>
+									<Progress bar color="danger" value={no}>
+										{!this.state.desktop && no < 20 ? '' : `No: ${survey.no}`}
+									</Progress>
 								</Progress>
 							</CardText>
 						</CardBody>

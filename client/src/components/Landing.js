@@ -16,8 +16,8 @@ const Landing = ({ auth }) => {
 								Emaily
 							</h3>
 							<p>
-								Easily send email surveys to up to 200,000 users to gain an accurate representation of
-								your thoughts.
+								Easily send surveys to your customers to gain an accurate representation of
+								their thoughts.
 							</p>
 							<a href="/auth/google" className="btn btn-danger">
 								{auth ? 'Get Started' : 'Login With Google'}
