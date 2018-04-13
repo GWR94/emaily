@@ -16,7 +16,7 @@ const SurveyReview = ({ onBack, formValues, submitSurvey, history }) => {
 
 	return (
 		<div>
-			<h4 className="text-center" style={{fontWeight: '500'}}>Are you sure?</h4>
+			<h4 className="text-center" style={{fontWeight: '700'}}>Are you sure?</h4>
 			{reviewFields}
 			<button className="btn btn-danger" onClick={onBack} style={{marginBottom: '20px'}}>
 				Back

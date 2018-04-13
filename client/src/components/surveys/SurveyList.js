@@ -41,7 +41,6 @@ class SurveyList extends Component {
 				no = Math.round(survey.no / survey.yes * 100);
 				yes = 100 - no;
 			}
-			console.log('yes: ' + yes, ' no: ' + no);
 			return (
 				<div key={survey._id}>
 					<Card className="navbar-colors" style={{ marginBottom: '20px' }}>

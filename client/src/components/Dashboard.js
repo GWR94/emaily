@@ -9,7 +9,7 @@ const Dashboard = ({ surveys }) => {
 		<div>
 			<Header />
 			<div className="container" style={{marginBottom: '100px'}}>
-			<h4 style={{textAlign: 'center', marginBottom: '20px', fontWeight: '500'}}>Dashboard</h4>
+			<h4 style={{textAlign: 'center', marginBottom: '20px', fontWeight: '700'}}>Dashboard</h4>
 			{ 
 				surveys.length === 0
 				? 	<div className="dashboard-text">

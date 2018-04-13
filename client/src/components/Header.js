@@ -53,7 +53,7 @@ class Header extends React.Component {
 									color="danger"
 									size="lg"
 									onClick={() => (window.location.href = '/api/logout')}
-									style={{ padding: '0 20px' }}
+									style={{ padding: '0 20px', marginRight: '5vw'}}
 								>
 									Logout
 								</Button>
@@ -68,7 +68,7 @@ class Header extends React.Component {
 		return (
 			<div>
 				<Navbar dark expand="md" className="navbar-colors" style={{ marginBottom: '30px' }}>
-					<NavbarBrand style={{ marginLeft: '10px' }}>
+					<NavbarBrand style={{ marginLeft: '5vw',fontSize: '24px'  }}>
 						<NavLink className="nav-brand" to={this.props.auth ? '/surveys' : '/'}>Emaily</NavLink>
 					</NavbarBrand>
 					<NavbarToggler onClick={this.toggle} />
