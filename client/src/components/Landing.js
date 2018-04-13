@@ -9,10 +9,10 @@ const Landing = ({ auth }) => {
 			<Header />
 			<Container>
 				<Row>
-					<Col md="3" />
+					<Col/>
 					<Col md="6">
 						<div className="welcome-box">
-							<h3 className="emaily-text" style={{ margin: '20px' }}>
+							<h3 className="emaily-text" style={{ margin: '20px', fontWeight: '700' }}>
 								Emaily
 							</h3>
 							<p>
@@ -24,7 +24,7 @@ const Landing = ({ auth }) => {
 							</a>
 						</div>
 					</Col>
-					<Col md="3" />
+					<Col/>
 				</Row>
 			</Container>
 		</div>
