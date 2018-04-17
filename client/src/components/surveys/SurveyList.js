@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSurveys } from '../../actions';
+import { fetchSurveys, deleteSurvey } from '../../actions';
 import { Card, CardText, CardBody, CardTitle, CardSubtitle, Progress } from 'reactstrap';
+import { Button } from 'reactstrap';
+import { withRouter } from 'react-router-dom';
 
 class SurveyList extends Component {
 	state = {
@@ -46,6 +48,16 @@ class SurveyList extends Component {
 					<Card className="navbar-colors" style={{ marginBottom: '20px' }}>
 						<CardBody>
 							<CardTitle className="survey-title">{survey.title}</CardTitle>
+							<Button
+								onClick={() => {
+									this.props.deleteSurvey(survey._id, this.props.history);
+									window.location.reload();
+								}}
+								color="danger"
+								style={{borderRadius: '50%', position: 'absolute', top: '6px', right: '3px', width: '30px', height: '30px'}}
+							>
+							<i className="material-icons" style={{fontSize: '18px', marginLeft: '-7px'}}>close</i>
+							</Button>
 							<CardSubtitle className="survey-subtitle">{survey.body}</CardSubtitle>
 							<CardText style={{ float: 'right' }} className="survey-sent">
 								Sent On: {new Date(survey.dateSent).toLocaleDateString()}
@@ -77,4 +89,4 @@ function mapStateToProps({ surveys }) {
 	return { surveys };
 }
 
-export default connect(mapStateToProps, { fetchSurveys })(SurveyList);
+export default connect(mapStateToProps, { fetchSurveys, deleteSurvey })(withRouter(SurveyList));
