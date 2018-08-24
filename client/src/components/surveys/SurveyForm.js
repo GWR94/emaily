@@ -24,7 +24,7 @@ class SurveyForm extends React.Component {
 								customised in the subject field.
 							</p>
 							<p>
-								Recipients <b>must</b> be seperated by a comma.
+								Recipients <b>must</b> be separated by a comma.
 							</p>
 						</div>
 					</div>
