@@ -32,3 +32,34 @@ Once you're all set up with some credits on your account, you can begin to send 
 When the survey recipient responds to your email, either positively or negatively, then the dashboard will visually update with these responses. Every few minutes the dashboard will update these values, and the end result can be something like this:
 
 ![alt text](survey.png "Survey")
+
+## Technologies
+
+### Front-End
+
+- Axios
+- Create-React-App
+- React 16
+- Reactstrap
+- Redux
+- Redux Form
+- Redux Thunk
+
+### Back-End
+
+- Body Parser
+- Concurrently
+- Cookie-Session
+- Express (Node.JS)
+- Local Tunnel
+- Lodash
+- Mongoose
+- Nodemon
+- Passport (Google OAuth 2.0)
+- Path Parser
+- SendGrid
+- Stripe
+
+### Testing
+
+
